@@ -18,3 +18,11 @@ public class User {
     private Integer fingerprintId;
     private String status;
 }
+
+
+
+
+
+
+
+                                     
