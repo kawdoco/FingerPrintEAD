@@ -1,0 +1,78 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: bci-attendance-system
+
+  # --- Supabase (Postgres) connection ---
+  # Values come from environment variables (see backend/.env.example and
+  # run-backend.ps1). NEVER commit real passwords into this file.
+  #
+  # IMPORTANT: use the *Session pooler* details from Supabase -> Connect.
+  # The "direct connection" host (db.<ref>.supabase.co) is IPv6-only and fails
+  # with UnknownHostException on most home/campus networks.
+  datasource:
+    url: ${SUPABASE_DB_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${SUPABASE_DB_USER:postgres}
+    password: ${SUPABASE_DB_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 20000
+
+  jpa:
+    hibernate:
+      # "update" creates any missing tables automatically. If you ran
+      # database/schema.sql already, it simply does nothing.
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  mvc:
+    format:
+      date: iso
+      date-time: iso
+
+  jackson:
+    time-zone: Asia/Colombo
+    default-property-inclusion: non_null
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+app:
+  cors:
+    allowed-origins: ${APP_CORS_ORIGINS:http://localhost:5173}
+
+  jwt:
+    # Use a long random string in production: openssl rand -base64 64
+    secret: ${APP_JWT_SECRET:CHANGE_THIS_TO_A_LONG_RANDOM_SECRET_BEFORE_DEPLOYING_1234567890}
+    expiration-minutes: ${APP_JWT_EXPIRATION_MINUTES:480}
+
+  attendance:
+    timezone: Asia/Colombo
+
+  device:
+    api-key-header: X-Device-Key
+
+  # Created automatically on first start if the tables are empty
+  bootstrap:
+    admin-username: ${APP_ADMIN_USERNAME:admin}
+    admin-password: ${APP_ADMIN_PASSWORD:ChangeMe123!}
+    device-code: ${APP_DEVICE_CODE:LAB204-R307S-01}
+    device-location: ${APP_DEVICE_LOCATION:Lab Room 204 - Main Door}
+    # Leave empty to auto-generate a random key (printed once in the log)
+    device-api-key: ${APP_DEVICE_API_KEY:}
+    seed-demo-data: ${APP_SEED_DEMO:false}
+
+logging:
+  level:
+    com.bcilab.attendance: INFO
+    org.springframework.security: INFO
