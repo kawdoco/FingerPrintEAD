@@ -10,7 +10,7 @@ import lombok.Setter;
 public class PersonDto {
     private Long id;
 
-    /** STUDENT, LECTURER, REV_FATHER or GUEST. */
+    /** STUDENT, LECTURER, STAFF, REV_FATHER or GUEST. */
     @NotBlank
     private String personType;
 
