@@ -52,6 +52,11 @@ public class SecurityConfig {
                 .requestMatchers("/error").permitAll()
                 .requestMatchers("/actuator/health").permitAll()
 
+                // The React app itself (only present when the frontend is packed into the jar,
+                // see package.ps1 / package.sh). These are plain pages/assets; real data stays behind /api.
+                .requestMatchers(HttpMethod.GET, "/", "/index.html", "/favicon.ico", "/assets/**",
+                        "/admin", "/admin/*").permitAll()
+
                 // Public
                 .requestMatchers("/api/v1/auth/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/attendance/live", "/api/v1/attendance/today/summary").permitAll()
