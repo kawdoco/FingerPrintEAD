@@ -144,7 +144,7 @@ public class PersonServiceImpl implements PersonService {
             return PersonType.valueOf(raw.trim().toUpperCase());
         } catch (Exception ex) {
             throw new BusinessRuleException(
-                    "Unknown person type: " + raw + " (use STUDENT, LECTURER, REV_FATHER or GUEST)");
+                    "Unknown person type: " + raw + " (use STUDENT, LECTURER, STAFF, REV_FATHER or GUEST)");
         }
     }
 
