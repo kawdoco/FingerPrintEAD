@@ -80,7 +80,8 @@ public class DataInitializer implements CommandLineRunner {
                 new Object[]{PersonType.STUDENT, "BCI/2024/003", "Achini Silva", "Neuro Systems"},
                 new Object[]{PersonType.STUDENT, "BCI/2024/004", "Ravindu Jayasuriya", "Robotics"},
                 new Object[]{PersonType.STUDENT, "BCI/2024/005", "Hiruni Wickramasinghe", "Data Science"},
-                new Object[]{PersonType.LECTURER, "STAFF/012", "Dr. Tharindu Bandara", "Signal Processing"},
+                new Object[]{PersonType.LECTURER, "LEC/012", "Dr. Tharindu Bandara", "Signal Processing"},
+                new Object[]{PersonType.STAFF, "STAFF/004", "Mr. Nuwan Silva", "Administration"},
                 new Object[]{PersonType.REV_FATHER, null, "Rev. Fr. Anton Perera", null},
                 new Object[]{PersonType.GUEST, null, "Sanduni Rathnayake (Visitor)", null});
 
